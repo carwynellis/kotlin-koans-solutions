@@ -29,14 +29,7 @@ class D {
 class EffectiveDate<R> : ReadWriteProperty<R, MyDate> {
     var timeInMillis: Long? = null
 
-    operator override fun getValue(thisRef: R, property: KProperty<*>): MyDate {
-        val date = timeInMillis?.toDate()
-        if (date != null) {
-            return MyDate(date.year, date.month, date.dayOfMonth)
-        }
-        // TODO - is this idiomatic?
-        throw UninitializedPropertyAccessException("timeInMillis is not set")
-    }
+    operator override fun getValue(thisRef: R, property: KProperty<*>): MyDate = timeInMillis!!.toDate()
 
     operator override fun setValue(thisRef: R, property: KProperty<*>, value: MyDate) {
         timeInMillis = value.toMillis()
