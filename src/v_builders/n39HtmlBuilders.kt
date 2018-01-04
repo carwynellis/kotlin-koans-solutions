@@ -36,15 +36,12 @@ fun renderProductTable(): String {
 
             val products = getProducts()
 
-            var row = 0
-
-            products.forEach { product ->
+            for((row, product) in products.withIndex()) {
                 tr {
                    td(getCellColor(row, 0)) { text(product.description) }
                    td(getCellColor(row, 1)) { text(product.price) }
                    td(getCellColor(row, 2)) { text(product.popularity )}
                }
-               row++
             }
         }
     }.toString()
